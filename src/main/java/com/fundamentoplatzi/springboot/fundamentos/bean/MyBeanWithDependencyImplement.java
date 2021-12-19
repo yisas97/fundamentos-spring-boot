@@ -2,8 +2,12 @@ package com.fundamentoplatzi.springboot.fundamentos.bean;
 
 public class MyBeanWithDependencyImplement implements MyBeanWithDependency
 {
+	//Esta llamando al Bean de Operacion
+	// Donde se utiliza la operacion suma
+	// Es decir estoy llamando un bena utilizando otro bean
 	private MyOperation myOperation;
 	
+	//Creando el constructor del bean operation
 	public MyBeanWithDependencyImplement(MyOperation myOperation) {
 		this.myOperation = myOperation;
 	}
