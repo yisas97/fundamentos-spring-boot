@@ -1,5 +1,7 @@
 package com.fundamentoplatzi.springboot.fundamentos;
 
+import com.fundamentoplatzi.springboot.fundamentos.bean.MyBean;
+import com.fundamentoplatzi.springboot.fundamentos.bean.MyBeanWithDependency;
 import com.fundamentoplatzi.springboot.fundamentos.component.ComponentDependency;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -10,12 +12,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FundamentosApplication implements CommandLineRunner
 {
 	private ComponentDependency componentDependency;
+	private MyBean myBean;
+	private MyBeanWithDependency myBeanWithDependency;
 	
 	//No se puede tener dos componente en un solo interface ya que no se puede saber cual tomar
 	//Por eso se utilizar ql @Qualifier para llamar que component llamar
-	public FundamentosApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependency)
+	public FundamentosApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependency,
+								  MyBean myBean,
+								  MyBeanWithDependency myBeanWithDependency)
 	{
 		this.componentDependency = componentDependency;
+		this.myBean = myBean;
+		this.myBeanWithDependency = myBeanWithDependency;
 	}
 	
 	public static void main(String[] args)
@@ -29,5 +37,8 @@ public class FundamentosApplication implements CommandLineRunner
 	{
 		//Inyectar de la compoenetdependency
 		componentDependency.saludar();
+		myBean.print();
+		myBeanWithDependency.printWithDependency();
+		
 	}
 }
