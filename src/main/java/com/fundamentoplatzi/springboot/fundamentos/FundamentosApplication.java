@@ -2,6 +2,7 @@ package com.fundamentoplatzi.springboot.fundamentos;
 
 import com.fundamentoplatzi.springboot.fundamentos.bean.MyBean;
 import com.fundamentoplatzi.springboot.fundamentos.bean.MyBeanWithDependency;
+import com.fundamentoplatzi.springboot.fundamentos.bean.MyBeanWithProperties;
 import com.fundamentoplatzi.springboot.fundamentos.bean.reto.valores.IValoresNumericos;
 import com.fundamentoplatzi.springboot.fundamentos.component.ComponentDependency;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,18 +17,21 @@ public class FundamentosApplication implements CommandLineRunner
 	private MyBean myBean;
 	private MyBeanWithDependency myBeanWithDependency;
 	private IValoresNumericos valoresNumericos;
+	private MyBeanWithProperties myBeanWithProperties;
 	
 	//No se puede tener dos componente en un solo interface ya que no se puede saber cual tomar
 	//Por eso se utilizar ql @Qualifier para llamar que component llamar
 	public FundamentosApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependency,
 								  MyBean myBean,
 								  MyBeanWithDependency myBeanWithDependency,
-								  IValoresNumericos valoresNumericos)
+								  IValoresNumericos valoresNumericos,
+								  MyBeanWithProperties myBeanWithProperties)
 	{
 		this.componentDependency = componentDependency;
 		this.myBean = myBean;
 		this.myBeanWithDependency = myBeanWithDependency;
 		this.valoresNumericos = valoresNumericos;
+		this.myBeanWithProperties = myBeanWithProperties;
 	}
 	
 	public static void main(String[] args)
@@ -44,5 +48,6 @@ public class FundamentosApplication implements CommandLineRunner
 		myBean.print();
 		myBeanWithDependency.printWithDependency();
 		valoresNumericos.valores();
+		System.out.println(myBeanWithProperties.function());
 	}
 }
