@@ -5,6 +5,7 @@ import com.fundamentoplatzi.springboot.fundamentos.bean.MyBeanWithDependency;
 import com.fundamentoplatzi.springboot.fundamentos.bean.MyBeanWithProperties;
 import com.fundamentoplatzi.springboot.fundamentos.bean.reto.valores.IValoresNumericos;
 import com.fundamentoplatzi.springboot.fundamentos.component.ComponentDependency;
+import com.fundamentoplatzi.springboot.fundamentos.pojo.UserPojo;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +19,7 @@ public class FundamentosApplication implements CommandLineRunner
 	private MyBeanWithDependency myBeanWithDependency;
 	private IValoresNumericos valoresNumericos;
 	private MyBeanWithProperties myBeanWithProperties;
+	private UserPojo userPojo;
 	
 	//No se puede tener dos componente en un solo interface ya que no se puede saber cual tomar
 	//Por eso se utilizar ql @Qualifier para llamar que component llamar
@@ -25,13 +27,15 @@ public class FundamentosApplication implements CommandLineRunner
 								  MyBean myBean,
 								  MyBeanWithDependency myBeanWithDependency,
 								  IValoresNumericos valoresNumericos,
-								  MyBeanWithProperties myBeanWithProperties)
+								  MyBeanWithProperties myBeanWithProperties,
+								  UserPojo userPojo)
 	{
 		this.componentDependency = componentDependency;
 		this.myBean = myBean;
 		this.myBeanWithDependency = myBeanWithDependency;
 		this.valoresNumericos = valoresNumericos;
 		this.myBeanWithProperties = myBeanWithProperties;
+		this.userPojo = userPojo;
 	}
 	
 	public static void main(String[] args)
@@ -49,5 +53,7 @@ public class FundamentosApplication implements CommandLineRunner
 		myBeanWithDependency.printWithDependency();
 		valoresNumericos.valores();
 		System.out.println(myBeanWithProperties.function());
+		
+		System.out.println(userPojo.getEmail() + "-" + userPojo.getPassword());
 	}
 }
